@@ -108,3 +108,36 @@ resource "aws_network_acl_association" "ibm-web-nacl-association" {
   network_acl_id = aws_network_acl.ibm-web-nacl.id
   subnet_id      = aws_subnet.ibm-web-sn.id
 }
+
+# PRIVATE NACL
+resource "aws_network_acl" "ibm-data-nacl" {
+  vpc_id = aws_vpc.ibm-vpc.id
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  tags = {
+    Name = "ibm-data-nacl"
+  }
+}
+
+# PRIVATE NACL ASSOCIATION
+resource "aws_network_acl_association" "ibm-data-nacl-association" {
+  network_acl_id = aws_network_acl.ibm-data-nacl.id
+  subnet_id      = aws_subnet.ibm-data-sn.id
+}
