@@ -60,3 +60,18 @@ resource "aws_route_table_association" "ibm-web-rt-association" {
   subnet_id      = aws_subnet.ibm-web-sn.id
   route_table_id = aws_route_table.ibm-web-rt.id
 }
+
+# PRIVATE ROUTE TABLE
+resource "aws_route_table" "ibm-data-rt" {
+  vpc_id = aws_vpc.ibm-vpc.id
+
+  tags = {
+    Name = "ibm-database-route-table"
+  }
+}
+
+# PRIVATE ROUTE TABLE ASSOCIATION
+resource "aws_route_table_association" "ibm-data-rt-association" {
+  subnet_id      = aws_subnet.ibm-data-sn.id
+  route_table_id = aws_route_table.ibm-data123-rt.id
+}
