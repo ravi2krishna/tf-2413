@@ -31,3 +31,12 @@ resource "aws_subnet" "ibm-data-sn" {
     Name = "ibm-database-subnet"
   }
 }
+
+# INTERNET GATEWAY
+resource "aws_internet_gateway" "ibm-igw" {
+  vpc_id = aws_vpc.ibm-vpc.id
+
+  tags = {
+    Name = "ibm-internet-gateway"
+  }
+}
