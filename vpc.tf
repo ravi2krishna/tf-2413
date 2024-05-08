@@ -75,3 +75,30 @@ resource "aws_route_table_association" "ibm-data-rt-association" {
   subnet_id      = aws_subnet.ibm-data-sn.id
   route_table_id = aws_route_table.ibm-data-rt.id
 }
+
+# PUBLIC NACL
+resource "aws_network_acl" "ibm-web-nacl" {
+  vpc_id = aws_vpc.ibm-vpc.id
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  tags = {
+    Name = "ibm-web-nacl"
+  }
+}
