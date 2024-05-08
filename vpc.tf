@@ -141,3 +141,14 @@ resource "aws_network_acl_association" "ibm-data-nacl-association" {
   network_acl_id = aws_network_acl.ibm-data-nacl.id
   subnet_id      = aws_subnet.ibm-data-sn.id
 }
+
+# PUBLIC SECUIRTY GROUP 
+resource "aws_security_group" "ibm-web-sg" {
+    name = "ibm-web-server-sg"
+    description = "Allows Web Server Traffic"
+    vpc_id = aws_vpc.ibm-vpc.id
+    
+    tags = {
+        Name = "ibm-web-secuirty-group"
+    }
+}
