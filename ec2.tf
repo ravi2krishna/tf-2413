@@ -4,7 +4,7 @@ resource "aws_instance" "ibm-web-server" {
   instance_type = "t2.micro"
   subnet_id = aws_subnet.ibm-web-sn.id
   key_name = "730"
-  vpc_security_group_ids = aws_security_group.ibm-web-sg.id
+  vpc_security_group_ids = [aws_security_group.ibm-web-sg.id]
 
   tags = {
     Name = "ibm-web-server"
